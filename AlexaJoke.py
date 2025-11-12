@@ -2,6 +2,14 @@ from tkinter import *
 from random import choice
 import pygame
 
+"""
+Please note that, while I made both of these audio functions myself,
+I decided to use Github Copilot to make it cleaner. the init, music load,
+set volume and play were all mine thanks to a bit of research into the
+pygame library. However, the try and except blocks were suggested by Copilot
+as a way to hunt down errors. In short, it added error-handling as a just in case effect.
+"""
+
 def playInitialDrum():
     try:
         #plays the drumroll when it shows the question part of the joke
@@ -33,6 +41,15 @@ def sendJoke(path="randomJokes.txt"): #this opens the jokes file
         return ["Joke file not found: randomJokes.txt"]
 
 jokes = sendJoke()
+
+"""
+Please note that the separatePunchLine function was made with the help of GitHub Copilot
+since I didn't even know that parsing the string line directly from the text file was possible. 
+This helped me to make the cancelReveal and showJoke functions and adding the delay
+to showing the punchline in the actual tkinter display.
+Also, most of the try and except blocks were suggested by Copilot to help with error-handling,
+since the original code that I made didn't have error-handlers.
+"""
 
 #this will separate the question and punchline using "?" as the tracker
 def separatePunchline(line):
@@ -112,6 +129,12 @@ root.geometry("420x200")
 root.resizable(False, False)#you cant increase or decrease the window manually
 
 givenAnswer = StringVar()
+
+"""
+Please note that the container frame and button frame were made with the help of GitHub Copilot
+since at the start, I only tried making the title frame and joke frame, which caused a few errors.
+This was the most efficient way of making sure everything was in place without issues.
+"""
 
 #this frame stacks all other frames inside it
 containerFrame = Frame(root)
