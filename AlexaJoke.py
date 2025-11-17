@@ -59,7 +59,7 @@ def separatePunchline(line):
         return (question.strip() + '?', rest.strip()) #returns both of them with the question mark readded
 
 revealAfterDelay = None
-current_punchline = None
+currentPunchline = None
 
 def cancelReveal():#this will help in putting a delay to revealing the punchline
     global revealAfterDelay
@@ -79,7 +79,7 @@ def cancelReveal():#this will help in putting a delay to revealing the punchline
     revealButton.config(state=NORMAL)#again, same thing
 
 def showJoke(raw, delay=1500):#this is the delaying part of the punchline
-    global revealAfterDelay, current_punchline
+    global revealAfterDelay, currentPunchline
     cancelReveal()#calls other function
     question, punchline = separatePunchline(raw)#raw means the whole joke line without being separated yet
     currentPunchline = punchline
