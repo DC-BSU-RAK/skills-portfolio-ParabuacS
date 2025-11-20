@@ -1,11 +1,17 @@
 from tkinter import * #grab everything from tkinter
 from random import randint, choice #we only need these two
+from PIL import ImageTk, Image
 import pygame #this is used for the background audio
 
 root = Tk() #the overall main frame where everything is in
 root.title('Math Quiz')
 root.geometry('318x250')
 root.config(bg="#DE0C8A")
+
+img = Image.open("MathQuizIcon.png") #this is for the display icon
+img = img.resize((32, 32)) #this is to make sure it's not too big
+icon = ImageTk.PhotoImage(img) #open the image
+root.iconphoto(True, icon) #send the image to the icon
 
 def playBGM():
     pygame.mixer.init()
