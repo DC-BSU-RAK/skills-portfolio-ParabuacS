@@ -1,5 +1,6 @@
 from tkinter import *
 from random import choice
+from PIL import ImageTk, Image
 import pygame
 
 """
@@ -138,6 +139,11 @@ root = Tk()#finally starting the tkinter display after ONE HUNDRED LINES!!!
 root.title("Alexa's Jokes")
 root.geometry("420x250")
 root.resizable(False, False)#you cant change the size of the screen
+
+img = Image.open("AlexaIcon.png") #display icon
+img = img.resize((32, 32)) 
+icon = ImageTk.PhotoImage(img)
+root.iconphoto(True, icon)
 
 givenAnswer = StringVar()
 
