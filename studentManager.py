@@ -26,7 +26,6 @@ def readStudentRecords(fileName=STUDENT_FILE):
     """
     return lines[1:] #skip the first line representing number of students
 
-
 def separateStudentInfo(line):
     #all lines will be turned into their own dictionaries
     categories = line.strip().split(",") #using the comma as the divider
@@ -63,11 +62,9 @@ def separateStudentInfo(line):
         "grade": grade
     }
 
-
 def separateStudents(lines):
     #a dictionary is created per studet
     return [separateStudentInfo(line) for line in lines]
-
 
 def writeToStudentRecords(fileName=STUDENT_FILE):
     #allows adding new student info and updating the number on the first line
@@ -84,7 +81,6 @@ def writeToStudentRecords(fileName=STUDENT_FILE):
                 f"{newStudent['exam']}\n"
             )
             file.write(line)
-
 
 def tableOfStudentInfo(mainFrame, studentsList):
     #this is for the table frame that shows all students
@@ -132,7 +128,6 @@ def descendingOrderSorting():
     tableOfStudentInfo(studentTableFrame, students)#same, refreshes the tabl
 
 #this one is for the individual student view frame
-
 def individualStudentView(selected):
     for student in students:
         if student["name"] == selected:
@@ -180,8 +175,12 @@ def reloadAllPages():
     #will reload the table to show new student info
     tableOfStudentInfo(studentTableFrame, students)
 
+"""
+small reflection, I'm nearing 200 lines
+and we're nowhere near done with the logic.
+send help :')
+"""
 #this is for the writing to txt file and then adding to the system
-
 def addNewStudent():
     global students
     #user will manually input each item
@@ -289,7 +288,7 @@ def deleteStudentInfo():
     #then it will ask you to confirm that you want to delete the student
     confirm = messagebox.askyesno("Confirm Delete", f"Are you sure you want to delete student ID {studentID}?")
     if not confirm:#askyesno makes the message box a yes or no option for the user
-        return
+        return  
 
     #grabs the student ID from the system the deletes it
     newStudents = [student for student in students if student["id"] != studentID]
@@ -317,29 +316,29 @@ def updateStudentInfo():
         messagebox.showerror("No selection", "Please choose a student to update.")
         return
 
-    if "(" not in selected or ")" not in selected:  #same parentheses check as delete
+    if "(" not in selected or ")" not in selected:  #same parentheses check as the delete function
         messagebox.showerror("Bad selection", "Unexpected selection format.")
         return
 
     studentID = selected.split("(")[-1].split(")")[0].strip()
 
-    #get new marks from inputs
+    #the inputs are used as the marks
     newS1 = updateInputS1.get().strip()
     newS2 = updateInputS2.get().strip()
     newS3 = updateInputS3.get().strip()
     newExam = updateInputExam.get().strip()
 
     #validations for integer marks
-    try:
+    try:#will convert the inputted marks into integers for grading system
         newS1Conv = int(newS1)
         newS2Conv = int(newS2)
         newS3Conv = int(newS3)
         newExamConv = int(newExam)
-    except ValueError:
+    except ValueError:#will force you to use whole numbers
         messagebox.showerror("Invalid Marks", "Marks must be integers.")
         return
 
-    #range checking
+    #the same range check as the other student info
     if not (0 <= newS1Conv <= 20 and 0 <= newS2Conv <= 20 and 0 <= newS3Conv <= 20):
         messagebox.showerror("Invalid Marks", "Subject marks must be between 0 and 20.")
         return
@@ -357,10 +356,10 @@ def updateStudentInfo():
             student["s3"] = newS3Conv
             student["exam"] = newExamConv
 
-            #recalculate totals and grade
+            #calculating like the other function
             total = newS1Conv + newS2Conv + newS3Conv + newExamConv
             percentage = (total / 160) * 100
-
+            #again, this is for the row color coding
             if percentage >= 70:
                 grade = "A"
             elif percentage >= 60:
@@ -371,14 +370,14 @@ def updateStudentInfo():
                 grade = "D"
             else:
                 grade = "F"
-
+            #shows the total points and grade
             student["total"] = total
             student["grade"] = grade
-
+            #the student is then found by the system
             found = True
             break
 
-    if not found:
+    if not found:#this is an error handler
         messagebox.showerror("Not found", f"No student with ID {studentID} was found.")
         return
 
@@ -388,16 +387,16 @@ def updateStudentInfo():
     #refresh the full system
     reloadAllPages()
 
-    #clear form
+    #clear the content you put in the form
     updateInputS1.delete(0, END)
     updateInputS2.delete(0, END)
     updateInputS3.delete(0, END)
     updateInputExam.delete(0, END)
 
-    #confirmation message
+    #confirmation
     messagebox.showinfo("Updated", f"Student ID {studentID} marks updated successfully.")
 
-# FINALLY STARTING THE TKINTER GUI OMG
+#FINALLY STARTING THE TKINTER GUI OMG
 
 root = Tk()
 root.title("Student Info Manager")
@@ -451,7 +450,6 @@ individualCategories = ["ID", "Name", "Subject 1", "Subject 2", "Subject 3", "Ex
 
 for i, category in enumerate(individualCategories, start=2):
     Label(individualStudentFrame,text=f"{category}:",font=("Arial", 12, "bold"),bg="#eef").grid(row=i, column=0, sticky="e")
-
     individualLabel[category] = Label(individualStudentFrame,text="",font=("Arial", 12),bg="#eef")
     individualLabel[category].grid(row=i, column=1, sticky="w")
 
