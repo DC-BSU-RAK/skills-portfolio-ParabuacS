@@ -421,10 +421,10 @@ The lambda part was added because grabbing the function by itself
 didn't work.
 """
 #making the frames
-titleFrame = Frame(container, bg="#ddeeff")
-individualView = Frame(container, bg="#eef")
-tableView = Frame(container, bg="#ffe")
-addAndDeleteView = Frame(container, bg="#f7f7f7")
+titleFrame = Frame(container, bg="#0e3053")
+individualView = Frame(container, bg="#0e3053")
+tableView = Frame(container, bg="#0e3053")
+addAndDeleteView = Frame(container, bg="#0e3053")
 
 for frame in (titleFrame, individualView, tableView, addAndDeleteView):
     frame.grid(row=0, column=0, sticky="nsew")
