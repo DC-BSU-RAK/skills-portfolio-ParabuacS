@@ -115,17 +115,17 @@ def tableOfStudentInfo(mainFrame, studentsList):
 def alphabeticalSorting():
     global students
     students = sorted(students, key=lambda student: student["name"])
-    reloadAllPages()#will reload to show the sorted view
+    tableOfStudentInfo(studentTableFrame, students)#refreshes the table
 
 def ascendingOrderSorting():
     global students
     students = sorted(students, key=lambda student: student["total"])
-    tableOfStudentInfo(studentTableFrame, students)#refreshes the table
+    tableOfStudentInfo(studentTableFrame, students)#again, refreshes the table
 
 def descendingOrderSorting():
     global students
     students = sorted(students, key=lambda student: student["total"], reverse=True)
-    tableOfStudentInfo(studentTableFrame, students)#same, refreshes the tabl
+    tableOfStudentInfo(studentTableFrame, students)#same, refreshes the table
 
 #this one is for the individual student view frame
 def individualStudentView(selected):
